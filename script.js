@@ -11,6 +11,9 @@ const getData = async (url) => {
 const sendData = async (url, data) => {
     const user = await fetch(url,{
         method: "Post",
+        headers: {
+            "Content-Type": "application/json",
+        },
         body: JSON.stringify(data)
     })
     if (!user.ok) {
@@ -19,4 +22,4 @@ const sendData = async (url, data) => {
     return await user.json()
 
 }
-getData('db.json').then((data) => sendData("https://jsonplaceholder.typicode.com/posts", data))
+getData('db.json').then((data) => sendData("https://jsonplaceholder.typicode.com/posts", data)).then(data => console.log(data))
